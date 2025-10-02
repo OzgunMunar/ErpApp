@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Domain", "ERP.Domain\ERP.Domain.csproj", "{5AA855F7-B3B8-4040-8FA5-C8E93AD0C699}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAppointment.Domain", "eAppointment.Domain\eAppointment.Domain.csproj", "{5AA855F7-B3B8-4040-8FA5-C8E93AD0C699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Application", "ERP.Application\ERP.Application.csproj", "{78DC5678-A8CF-4854-B576-7B9B351606ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAppointment.Application", "eAppointment.Application\eAppointment.Application.csproj", "{78DC5678-A8CF-4854-B576-7B9B351606ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Infrastructure", "ERP.Infrastructure\ERP.Infrastructure.csproj", "{5D8BD0C4-8346-4E97-BD68-6FBFDA969773}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAppointment.Infrastructure", "eAppointment.Infrastructure\eAppointment.Infrastructure.csproj", "{5D8BD0C4-8346-4E97-BD68-6FBFDA969773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.WebAPI", "ERP.WebAPI\ERP.WebAPI.csproj", "{97FCBAD7-0C9B-43A7-8375-C2A929B13C39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAppointment.WebAPI", "eAppointment.WebAPI\eAppointment.WebAPI.csproj", "{97FCBAD7-0C9B-43A7-8375-C2A929B13C39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
