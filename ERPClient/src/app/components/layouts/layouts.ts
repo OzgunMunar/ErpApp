@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { MainSidebar } from './main-sidebar/main-sidebar';
 import { ControlSidebar } from './control-sidebar/control-sidebar';
+import { Footer } from './footer/footer';
 
 @Component({
   selector: 'app-layouts',
@@ -10,7 +11,8 @@ import { ControlSidebar } from './control-sidebar/control-sidebar';
     RouterOutlet,
     Navbar,
     MainSidebar,
-    ControlSidebar
+    ControlSidebar,
+    Footer
   ],
   templateUrl: './layouts.html',
   styleUrl: './layouts.css'
