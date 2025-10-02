@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
+
 export class Navbar {
+
+  readonly #router = inject(Router)
+  
+  signOut() {
+    localStorage.removeItem("token")
+    this.#router.navigateByUrl("/login")
+  }
 
 }
