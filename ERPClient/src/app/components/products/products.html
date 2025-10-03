@@ -1,1 +1,143 @@
-<p>products works!</p>
+<div class="content-wrapper">
+
+    <app-blank pageName="Products" [routes]="['Products']">
+
+        <app-section sectionTitle="List Of Products">
+
+            <div class="form-group mt-2">
+
+                <flexi-grid 
+                    [data]="data()" 
+                    [showCaption]="true" 
+                    [showExportExcelBtn]="true" 
+                    language="en"
+                    exportExcelFileName="Products" 
+                    (onrefresh)="products.reload()">
+
+                    <ng-template flexiGridCaptionCommandTemplate>
+                        <flexi-button btnIcon="add" btnColor="primary" title="Add Product" (click)="openAddModal()"
+                            flexiTooltip />
+                    </ng-template>
+
+                    <flexi-grid-column field="productName" title="Product Name" />
+                    <flexi-grid-column field="productType" title="Product Type" />
+
+                    <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+
+                        <flexi-button btnIcon="edit" btnColor="info" title="Edit Product Info" btnSize="small"
+                            (click)="openUpdateModal(item.id)" flexiTooltip />
+
+                        <flexi-button (click)="deleteProduct(item.id, item.productName)" cancelBtnText="Cancel"
+                            btnIcon="delete" btnColor="danger" title="Delete Product" btnSize="small" flexiTooltip />
+
+                    </ng-template>
+
+                </flexi-grid>
+
+            </div>
+
+            <!-- Create Modal -->
+            <div #addModal class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Add Product Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="saveProduct(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Product Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="newProduct().productName"
+                                        name="productName" class="form-control" minlength="3" required>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Product Types:</label>
+                                    <select class="form-control" [(ngModel)]="newProduct().productType" name="productType" required>
+                                            
+                                        <option value="" disabled>Select Product Type</option>
+
+                                        @for(productType of productTypeList(); track productType) {
+
+                                            <option [value]="productType.value">{{ productType.name }}</option>
+
+                                        }
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save Product</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Modal -->
+            <div #updateModal class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Update Product Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="updateProduct(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Product Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="updateProductValues().productName"
+                                        name="productName" class="form-control" minlength="3" required>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Product Types:</label>
+                                    <select class="form-control" [(ngModel)]="updateProductValues().productType" name="productType" required>
+                                            
+                                        <option value="" disabled>Select Product Type</option>
+
+                                        @for(productType of productTypeList(); track productType) {
+
+                                            <option [value]="productType.value">{{ productType.name }}</option>
+
+                                        }
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-info">Update Product</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </app-section>
+
+    </app-blank>
+
+</div>

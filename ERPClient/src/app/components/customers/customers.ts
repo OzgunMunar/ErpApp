@@ -23,16 +23,6 @@ import { ResultModel } from '../../models/result.model';
 })
 export default class Customers {
 
-  constructor() {
-
-    effect(() => {
-
-      // console.log(this.customers())
-
-    })
-
-  }
-
   readonly newCustomer = signal<CustomerModel>({ ...initialCustomer })
   readonly updateCustomerValues = signal<CustomerModel>({ ...initialCustomer })
   readonly updateCustomerId = signal<string>("")
