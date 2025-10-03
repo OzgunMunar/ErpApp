@@ -51,12 +51,14 @@
               "src/styles.css",
               "src/assets/plugins/fontawesome-free/css/all.min.css",
               "src/assets/dist/css/adminlte.min.css",
-              "node_modules/flexi-toast/src/flexi-toast.css"
+              "node_modules/flexi-toast/src/flexi-toast.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "src/assets/plugins/jquery/jquery.min.js",
               "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "src/assets/dist/js/adminlte.min.js"
+              "src/assets/dist/js/adminlte.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {

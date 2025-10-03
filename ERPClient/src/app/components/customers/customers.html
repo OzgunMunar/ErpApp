@@ -1,0 +1,195 @@
+<div class="content-wrapper">
+
+    <app-blank pageName="Customers" [routes]="['Customers']">
+
+        <app-section sectionTitle="List Of Customers">
+            
+            <div class="form-group mt-2">
+
+                <flexi-grid [data]="data()" [showCaption]="true" [showExportExcelBtn]="true" language="en"
+                    exportExcelFileName="Customers" (onrefresh)="customers.reload()">
+
+                    <ng-template flexiGridCaptionCommandTemplate>
+                        <flexi-button btnIcon="add" btnColor="primary" title="Add Customer" (click)="openAddModal()"
+                            flexiTooltip />
+                    </ng-template>
+
+                    <flexi-grid-column field="fullName" title="Full Name" />
+                    <flexi-grid-column field="taxDepartment" title="Tax Department" />
+                    <flexi-grid-column field="taxNumber" title="Email" />
+                    <flexi-grid-column field="fullAddress" title="Full Address" />
+
+                    <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+
+                        <flexi-button btnIcon="edit" btnColor="info" title="Edit Customer Info" btnSize="small"
+                            (click)="openUpdateModal(item.id)" flexiTooltip />
+
+                        <flexi-button (click)="deleteCustomer(item.id, item.fullName)" cancelBtnText="Cancel"
+                            btnIcon="delete" btnColor="danger" title="Delete Customer" btnSize="small" flexiTooltip />
+
+                    </ng-template>
+
+                </flexi-grid>
+
+            </div>
+
+            <!-- Create Modal -->
+            <div #addModal class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Add Customer Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="saveCustomer(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Full Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="newCustomer().fullName"
+                                        name="fullName" class="form-control" minlength="3" required>
+                                    <div class="invalid-feedback">Full Name is required.</div>
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Tax Department:</label>
+                                    <input type="text" [(ngModel)]="newCustomer().taxDepartment" name="taxDepartment"
+                                        class="form-control" minlength="3" required>
+                                     
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Tax Number:</label>
+                                    <input type="text" [(ngModel)]="newCustomer().taxNumber" name="taxNumber"
+                                        class="form-control" minlength="3" required>
+                                    <div class="invalid-feedback">Tax Number is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>City:</label>
+                                    <input type="text" [(ngModel)]="newCustomer().city" name="city" class="form-control"
+                                        minlength="3" required>
+                                    <div class="invalid-feedback">City is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Town:</label>
+                                    <input type="text" [(ngModel)]="newCustomer().town" name="town" class="form-control"
+                                        minlength="3" required>
+                                    <div class="invalid-feedback">Town is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Street:</label>
+                                    <input type="text" [(ngModel)]="newCustomer().street" name="street"
+                                        class="form-control" minlength="3" required>
+                                    <div class="invalid-feedback">Street is required.</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save Customer</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Modal -->
+            <div #updateModal class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Update Customer Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="updateCustomer(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Full Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="updateCustomerValues().fullName"
+                                        name="fullName" class="form-control" minlength="3" required>
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Tax Department:</label>
+                                    <input type="text" [(ngModel)]="updateCustomerValues().taxDepartment" name="taxDepartment"
+                                        class="form-control" minlength="3" required>
+                                     
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Tax Number:</label>
+                                    <input type="text" [(ngModel)]="updateCustomerValues().taxNumber" name="taxNumber"
+                                        class="form-control" minlength="3" required>
+                                    <div class="invalid-feedback">Tax Number is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>City:</label>
+                                    <input type="text" [(ngModel)]="updateCustomerValues().city" name="city" class="form-control"
+                                        minlength="3" required>
+                                    <div class="invalid-feedback">City is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Town:</label>
+                                    <input type="text" [(ngModel)]="updateCustomerValues().town" name="town" class="form-control"
+                                        minlength="3" required>
+                                    <div class="invalid-feedback">Town is required.</div>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Street:</label>
+                                    <input type="text" [(ngModel)]="updateCustomerValues().street" name="street"
+                                        class="form-control" minlength="3" required>
+                                    <div class="invalid-feedback">Street is required.</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-info">Update Customer</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </app-section>
+
+    </app-blank>
+
+</div>
