@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "blnR83tRXMo=",
+  "dgSpecHash": "055G3AaDCG0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Sevgi\\Desktop\\ERPProject\\ERPServer\\ERP.WebAPI\\ERP.WebAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Sevgi\\.nuget\\packages\\ardalis.smartenum\\8.2.0\\ardalis.smartenum.8.2.0.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",

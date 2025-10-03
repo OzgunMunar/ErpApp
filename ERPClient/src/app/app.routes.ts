@@ -21,7 +21,14 @@ export const routes: Routes = [
             {
                 path: "customers",
                 loadComponent: () => import("../app/components/customers/customers")
-                // loadComponent: () => import("../app/components/customers/customers")
+            },
+            {
+                path: "depots",
+                loadComponent: () => import("../app/components/depots/depots")
+            },
+            {
+                path: "products",
+                loadComponent: () => import("../app/components/products/products")
             }
         ]
     }

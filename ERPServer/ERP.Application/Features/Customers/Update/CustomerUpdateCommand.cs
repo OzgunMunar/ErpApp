@@ -2,14 +2,8 @@
 using ERP.Domain.Entities;
 using ERP.Domain.Repositories;
 using GenericRepository;
-using Mapster;
 using MapsterMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TS.Result;
 
 namespace ERP.Application.Features.Customers.Update
@@ -24,7 +18,7 @@ namespace ERP.Application.Features.Customers.Update
         string Town,
         string Street
 
-        ):IRequest<Result<string>>;
+        ) : IRequest<Result<string>>;
 }
 
 internal sealed class CustomerUpdateCommandHandler(
@@ -57,7 +51,8 @@ internal sealed class CustomerUpdateCommandHandler(
         customerRepository.Update(customer);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return Result<string>.Succeed("Customer is successfully updated.");
+        return Result<string>.Succeed("Customer successfully updated.");
 
     }
+
 }

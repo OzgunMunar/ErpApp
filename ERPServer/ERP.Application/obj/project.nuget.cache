@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3ti2Ad1A58A=",
+  "dgSpecHash": "z+MUNuBb8a8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Sevgi\\Desktop\\ERPProject\\ERPServer\\ERP.Application\\ERP.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Sevgi\\.nuget\\packages\\ardalis.smartenum\\8.2.0\\ardalis.smartenum.8.2.0.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "C:\\Users\\Sevgi\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",

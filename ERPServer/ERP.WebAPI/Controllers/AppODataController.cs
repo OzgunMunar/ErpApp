@@ -1,4 +1,5 @@
 ﻿using ERP.Application.Features.Customers.GetAll;
+using ERP.Application.Features.Depot.GetAll;
 using ERP.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,6 +32,7 @@ namespace ERP.WebAPI.Controllers
             builder.EnableLowerCamelCase();
 
             builder.EntitySet<CustomersGetAllQueryResponse>("customers");
+            builder.EntitySet<DepotGetAllQueryResponse>("depots");
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();
@@ -40,6 +42,13 @@ namespace ERP.WebAPI.Controllers
         public async Task<IQueryable<CustomersGetAllQueryResponse>> GetAllCustomers(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new CustomersGetAllQuery(), cancellationToken);
+            return response;
+        }
+
+        [HttpGet("depots")]
+        public async Task<IQueryable<DepotGetAllQueryResponse>> GetAllDepots(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new DepotGetAllQuery(), cancellationToken);
             return response;
         }
 

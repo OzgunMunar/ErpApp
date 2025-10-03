@@ -16,7 +16,6 @@ namespace ERP.WebAPI.Controllers
         public async Task<IActionResult> CreateCustomer(CustomerCreateCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
-
             return StatusCode(response.StatusCode, response);
         }
 
@@ -24,7 +23,6 @@ namespace ERP.WebAPI.Controllers
         public async Task<IActionResult> UpdateCustomer(CustomerUpdateCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
-
             return StatusCode(response.StatusCode, response);
         }
 

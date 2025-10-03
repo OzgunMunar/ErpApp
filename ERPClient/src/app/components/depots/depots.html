@@ -1,0 +1,155 @@
+<div class="content-wrapper">
+
+    <app-blank pageName="Depots" [routes]="['Depots']">
+
+        <app-section sectionTitle="List Of Depots">
+            
+            <div class="form-group mt-2">
+
+                <flexi-grid 
+                    [data]="data()" 
+                    [showCaption]="true" 
+                    [showExportExcelBtn]="true" 
+                    language="en"
+                    exportExcelFileName="Depots" 
+                    (onrefresh)=" depots.reload()">
+
+                    <ng-template flexiGridCaptionCommandTemplate>
+                        <flexi-button btnIcon="add" btnColor="primary" title="Add Depot" (click)="openAddModal()"
+                            flexiTooltip />
+                    </ng-template>
+
+                    <flexi-grid-column field="depotName" title="Depot Name" />
+                    <flexi-grid-column field="fullAddress" title="Full Address" />
+
+                    <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+
+                        <flexi-button btnIcon="edit" btnColor="info" title="Edit Depot Info" btnSize="small"
+                            (click)="openUpdateModal(item.id)" flexiTooltip />
+
+                        <flexi-button (click)="deleteDepot(item.id, item.depotName)" cancelBtnText="Cancel"
+                            btnIcon="delete" btnColor="danger" title="Delete Depot" btnSize="small" flexiTooltip />
+
+                    </ng-template>
+
+                </flexi-grid>
+
+            </div>
+
+            <!-- Create Modal -->
+            <div #addModal class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Add Depot Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="saveDepot(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Depot Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="newDepot().depotName"
+                                        name="depotName" class="form-control" minlength="3" required>
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>City:</label>
+                                    <input type="text" [(ngModel)]="newDepot().city" name="city" class="form-control"
+                                        minlength="3" required>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Town:</label>
+                                    <input type="text" [(ngModel)]="newDepot().town" name="town" class="form-control"
+                                        minlength="3" required>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Street:</label>
+                                    <input type="text" [(ngModel)]="newDepot().street" name="street"
+                                        class="form-control" minlength="3" required>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save Depot</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Modal -->
+            <div #updateModal class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Update Depot Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="updateDepot(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Depot Name:</label>
+                                    <input #addFirstInput type="text" [(ngModel)]="updateDepotValues().depotName"
+                                        name="depotName" class="form-control" minlength="3" required>
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>City:</label>
+                                    <input type="text" [(ngModel)]="updateDepotValues().city" name="city" class="form-control"
+                                        minlength="3" required>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Town:</label>
+                                    <input type="text" [(ngModel)]="updateDepotValues().town" name="town" class="form-control"
+                                        minlength="3" required>
+
+                                </div>
+
+                                <div class="form-group mt-3">
+
+                                    <label>Street:</label>
+                                    <input type="text" [(ngModel)]="updateDepotValues().street" name="street"
+                                        class="form-control" minlength="3" required>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-info">Update Depot</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </app-section>
+
+    </app-blank>
+
+</div>

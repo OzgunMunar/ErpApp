@@ -18,6 +18,18 @@ export const Menus: MenuModel[] = [
         icon: "far fa fa-users",
         url: "/customers",
         isTitle: false
+    },   
+    {
+        name: "Depots",
+        icon: "far fa fa-warehouse",
+        url: "/depots",
+        isTitle: false
+    },   
+    {
+        name: "Products",
+        icon: "far fa fa-boxes",
+        url: "/products",
+        isTitle: false
     }
 
 ]

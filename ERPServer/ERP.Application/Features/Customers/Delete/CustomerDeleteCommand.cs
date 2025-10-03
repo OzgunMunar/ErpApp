@@ -40,7 +40,7 @@ namespace ERP.Application.Features.Customers.Delete
             customerRepository.Update(customer);
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result<string>.Succeed("Customer is deleted successfully.");
+            return Result<string>.Succeed("Customer deleted successfully.");
 
         }
     }
