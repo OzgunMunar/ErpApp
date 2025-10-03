@@ -190,3 +190,6 @@ C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\FluentVa
 C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\FluentValidation.AspNetCore.dll
 C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\Scalar.AspNetCore.dll
+C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Sevgi\Desktop\ERPProject\ERPServer\ERP.WebAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

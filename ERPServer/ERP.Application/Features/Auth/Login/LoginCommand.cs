@@ -9,8 +9,8 @@ using TS.Result;
 namespace ERP.Application.Features.Auth.Login
 {
     public sealed record LoginCommand(
-        string UserNameOrEmail,
-        string Password
+        string emailOrUserName,
+        string password
     ) : IRequest<Result<LoginCommandResponse>>;
 
 }

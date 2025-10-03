@@ -9,11 +9,13 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddResponseCompression(opt =>
 {
     opt.EnableForHttps = true;
 });
-// 08:30 - 56video
+
 builder.Services.AddSingleton(new Mapper());
 builder.Services.AddScoped<IMapper, Mapper>();
 
@@ -49,9 +51,18 @@ builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ERP API V1");
+        c.RoutePrefix = string.Empty;
+    });
+}
 
 app.UseCors(x => x
-    .WithOrigins("http://localhost:4200")
+    //.WithOrigins("http://localhost:4200")
     .AllowAnyHeader()
     .AllowCredentials()
     .AllowAnyMethod()
@@ -71,5 +82,6 @@ app.MapControllers();
 
 // app.UseAuthentication();
 // app.UseAuthorization();
+await Helper.CreateUserAsync(app);
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using ERP.Domain.Users;
+﻿using ERP.Application.Features.Customers.GetAll;
+using ERP.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ namespace ERP.WebAPI.Controllers
     [Route("odata")]
     [ApiController]
     [EnableQuery]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class AppODataController : ODataController
     {
         private readonly IMediator _mediator;
@@ -28,18 +30,18 @@ namespace ERP.WebAPI.Controllers
 
             builder.EnableLowerCamelCase();
 
-            //builder.EntitySet<GetAllDoctorsQueryResponse>("doctors");
+            builder.EntitySet<CustomersGetAllQueryResponse>("customers");
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();
         }
 
-        //[HttpGet("employees")]
-        //public async Task<IQueryable<GetAllDoctorsQueryResponse>> GetAllDoctors(CancellationToken cancellationToken)
-        //{
-        //    var response = await sender.Send(new GetAllDoctorsQuery(), cancellationToken);
-        //    return response;
-        //}
+        [HttpGet("customers")]
+        public async Task<IQueryable<CustomersGetAllQueryResponse>> GetAllCustomers(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new CustomersGetAllQuery(), cancellationToken);
+            return response;
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ERP.Domain.Abstractions;
+using ERP.Domain.Entities;
 using ERP.Domain.Users;
 using GenericRepository;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,8 @@ namespace ERP.Infrastructure.Context
         {
             _httpContextAccessor = httpContextAccessor;
         }
+
+        public DbSet<Customer> Customers { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

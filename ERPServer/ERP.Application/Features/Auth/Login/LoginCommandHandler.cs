@@ -16,9 +16,9 @@ internal sealed class LoginCommandHandler(
     {
         AppUser? user = await userManager.Users.FirstOrDefaultAsync
             (user =>
-                user.Email == request.UserNameOrEmail
+                user.Email == request.emailOrUserName
                 ||
-                user.UserName == request.UserNameOrEmail,
+                user.UserName == request.emailOrUserName,
             cancellationToken);
 
         if (user is null)
@@ -26,7 +26,7 @@ internal sealed class LoginCommandHandler(
             return Result<LoginCommandResponse>.Failure("User could not found");
         }
 
-        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
+        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user, request.password, true);
 
         if (signInResult.IsLockedOut)
         {

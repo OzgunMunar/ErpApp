@@ -23,7 +23,6 @@ namespace ERP.Domain.Abstractions
         public bool IsDeleted { get; set; }
         public DateTimeOffset? DeletedAt { get; set; }
         public Guid? DeletedUserId { get; set; }
-        public bool IsActive { get; set; } = true;
 
         #endregion
     }

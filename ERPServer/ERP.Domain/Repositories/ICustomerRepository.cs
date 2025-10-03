@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERP.Domain.Repositories
 {
-    public interface IEmployeeRepository : IRepository<Employee>
+    public interface ICustomerRepository:IRepository<Customer>
     {
     }
 }
