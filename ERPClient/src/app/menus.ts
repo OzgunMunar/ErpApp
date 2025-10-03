@@ -14,35 +14,10 @@ export const Menus: MenuModel[] = [
         isTitle: false
     },   
     {
-        name: "customers",
-        icon: "fas fa-solid fa-home",
-        url: "/a",
+        name: "Customers",
+        icon: "far fa fa-users",
+        url: "/customers",
         isTitle: false
-    },   
-    {
-        name: "fılan",
-        icon: "fas fa-solid fa-home",
-        url: "/f",
-        isTitle: false
-    },   
-    {
-        name: "Modıfıkasyon",
-        icon: "fas fa-solid fa-home",
-        url: "/dsfgds",
-        isTitle: false
-    },   
-    {
-        name: "Baska deger",
-        icon: "fas fa-solid fa-home",
-        url: "/b",
-        isTitle: false
-    },   
-    {
-        name: "fgdfdfghdfg",
-        icon: "fas fa-solid fa-home",
-        url: "/v",
-        isTitle: false
-    },
-
+    }
 
 ]
