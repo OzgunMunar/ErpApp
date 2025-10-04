@@ -1,38 +1,73 @@
+import { Component, computed, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Section } from '../section/section';
+import { Blank } from '../blank/blank';
 import { httpResource } from '@angular/common/http';
-import { Component, computed, ElementRef, inject, signal, ViewChild } from '@angular/core';
-import { initialProduct, ProductModel } from '../../models/product.model';
-import { ProductTypeModel } from '../../models/product-type.model';
-import { productTypes } from '../../constants';
+import { FlexiGridModule } from 'flexi-grid';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FlexiToastService } from 'flexi-toast';
 import { Http } from '../../services/http';
-import bootstrap from 'bootstrap';
-import { NgForm } from '@angular/forms';
+import * as bootstrap from 'bootstrap';
 import { ResultModel } from '../../models/result.model';
+import { initialProduct, ProductModel } from '../../models/product.model';
+import { productTypes } from '../../constants';
+import { initialProductType, ProductTypeModel } from '../../models/product-type.model';
 
 @Component({
+
   selector: 'app-products',
-  imports: [],
+  imports: [
+    Section,
+    Blank,
+    FlexiGridModule,
+    FormsModule
+  ],
   templateUrl: './products.html',
   styleUrl: './products.css'
+
 })
 
 export default class Products {
 
-  readonly products = httpResource<ODataResponse<ProductModel>>(() => "http://localhost:5113/odata/products")
-  readonly productTypeList = signal<ProductTypeModel[]>(productTypes)
+  readonly products = httpResource<ProductModel[]>(() => "http://localhost:5113/odata/products")
+  readonly productTypes = signal<ProductTypeModel[]>(productTypes)
+
   readonly newProduct = signal<ProductModel>({ ...initialProduct })
   readonly updateProductValues = signal<ProductModel>({ ...initialProduct })
   readonly updateProductId = signal<string>("")
 
+  readonly loading = computed(() => this.products.isLoading())
+
   @ViewChild('addFirstInput') addFirstInput!: ElementRef<HTMLInputElement>
   @ViewChild('updateFirstInput') updateFirstInput!: ElementRef<HTMLInputElement>
-  @ViewChild('addModal') addModalRef!: ElementRef<HTMLDivElement>
-  @ViewChild('updateModal') updateModalRef!: ElementRef<HTMLDivElement>
+  @ViewChild('addModal') addModalRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('updateModal') updateModalRef!: ElementRef<HTMLDivElement>;
 
-  readonly #toast = inject(FlexiToastService)
+  readonly #toastr = inject(FlexiToastService)
   readonly #http = inject(Http)
 
-  readonly data = computed(() => this.products.value() ?? [])
+  constructor() {
+
+    effect(() => {
+
+      // console.log(this.products.value())
+
+    })
+
+  }
+
+  readonly data = computed(() => {
+
+    return this.products.value()?.map((val, i) => {
+
+      return {
+        ...val,
+        productTypeName: productTypes.find(pt => pt.value == val.productType)?.name ?? ""
+
+      } as ProductModel
+
+    }) ?? []
+
+  })
 
   openAddModal() {
 
@@ -68,16 +103,16 @@ export default class Products {
 
     if (!form.valid) {
 
-      this.#toast.showToast("Missing Data", "There are empty fields!", "error")
+      this.#toastr.showToast("Missing Data", "There are empty fields!", "error")
       return
 
     }
 
     this.newProduct.set(form.value)
 
-    this.#http.post<ResultModel<ProductModel>>('product', this.newProduct(), () => {
+    this.#http.post<ResultModel<ProductModel>>("product", this.newProduct(), (res) => {
 
-      this.#toast.showToast("Success", "Product successfully created.", "success")
+      this.#toastr.showToast("Success", "Product successfully created.", "success")
 
       const modalInstance = bootstrap.Modal.getInstance(this.addModalRef.nativeElement)
       modalInstance?.hide()
@@ -92,7 +127,7 @@ export default class Products {
 
     this.#http.put<ResultModel<ProductModel>>("product", this.updateProductValues(), (res) => {
 
-      this.#toast.showToast("Success", "Product successfully updated.", "success")
+      this.#toastr.showToast("Success", "Product successfully updated.", "success")
 
       const modalInstance = bootstrap.Modal.getInstance(this.updateModalRef.nativeElement)
       modalInstance?.hide()
@@ -103,20 +138,20 @@ export default class Products {
 
   }
 
-  deleteProduct(id: string, productName: string) {
+  deleteProduct(id: string, fullName: string) {
 
-    this.#toast.showSwal("Delete Depot?", `Are you sure about deleting product ${productName}?`, "Delete", () => {
+    this.#toastr.showSwal("Delete Product?", `Are you sure about deleting product ${fullName}?`, "Delete", () => {
 
       this.#http.delete(`product/${id}`, (res) => {
 
         if (res.isSuccessful) {
 
-          this.#toast.showToast("Success", `Product(${productName}) is deleted.`, "success");
+          this.#toastr.showToast("Success", `Product(${fullName}) is deleted.`, "success");
           this.products.reload();
 
         } else {
 
-          this.#toast.showToast("Error", `Product(${productName}) could not be deleted`, "error");
+          this.#toastr.showToast("Error", `Product(${fullName}) could not be deleted`, "error");
 
         }
 
@@ -128,11 +163,11 @@ export default class Products {
 
   getValuesForUpdate(id: string) {
 
-    const product = this.products.value()?.value.find(product => product.id === id)
+    const product = this.products.value()?.find(product => product.id === id)
 
     if (!product) {
 
-      this.#toast.showToast("Problem", "Record might have been deleted", "error")
+      this.#toastr.showToast("Problem", "Record might have been deleted", "error")
       return
 
     }
@@ -143,4 +178,3 @@ export default class Products {
   }
 
 }
-// "SqlServer": "Server=localhost;Database=ERPDB;User Id=sa;Password=admin;TrustServerCertificate=True"

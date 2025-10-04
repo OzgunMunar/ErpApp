@@ -149,12 +149,11 @@ namespace ERP.Infrastructure.Migrations
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("varchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("ProductType")
                         .HasColumnType("int")
-                        .HasColumnName("Product");
+                        .HasColumnName("ProductType");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");

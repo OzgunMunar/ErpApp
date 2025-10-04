@@ -1,2 +1,4 @@
 # Visual Studio temporary files
 .vs/
+bin/
+obj/

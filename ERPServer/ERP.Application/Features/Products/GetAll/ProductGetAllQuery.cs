@@ -10,12 +10,18 @@ namespace ERP.Application.Features.Products.GetAll
     public sealed record ProductGetAllQuery()
         : IRequest<IQueryable<ProductGetAllQueryResponse>>;
 
-    public sealed class ProductGetAllQueryResponse : EntityDto
-    {
-        public string ProductName { get; set; } = default!;
-        public int ProductType { get; set; }
+    public sealed record ProductGetAllQueryResponse
+        (
+            Guid Id,
+            string ProductName,
+            int ProductType
+        );
+    //{
+    //    public Guid Id { get; set; }
+    //    public string ProductName { get; set; } = default!;
+    //    public int ProductType { get; set; }
 
-    }
+    //}
 
     internal sealed class ProductGetAllQueryHandler(
         
@@ -28,13 +34,13 @@ namespace ERP.Application.Features.Products.GetAll
         {
             
             var products = await productRepository
-                .GetAll()
                 .Where(product => product.IsDeleted == false)
                 .Select(product => new ProductGetAllQueryResponse
-                {
-                    ProductName = product.ProductName,
-                    ProductType = product.ProductType
-                })
+                 (
+                    product.Id,
+                    product.ProductName,
+                    product.ProductType
+                 ))
                 .ToListAsync(cancellationToken);
 
             return products.AsQueryable();

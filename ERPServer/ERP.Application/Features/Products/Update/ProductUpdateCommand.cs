@@ -42,7 +42,7 @@ namespace ERP.Application.Features.Products.Update
             }
 
             var config = new TypeAdapterConfig();
-            config.NewConfig<ProductCreateCommand, Product>()
+            config.NewConfig<ProductUpdateCommand, Product>()
                 .Map(dest => dest.ProductType, src => ProductEnum.FromValue(src.ProductType));
 
             mapper = new Mapper(config);

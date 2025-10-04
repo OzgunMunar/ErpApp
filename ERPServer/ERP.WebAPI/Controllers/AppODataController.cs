@@ -1,5 +1,6 @@
 ﻿using ERP.Application.Features.Customers.GetAll;
 using ERP.Application.Features.Depot.GetAll;
+using ERP.Application.Features.Products.GetAll;
 using ERP.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -49,6 +50,13 @@ namespace ERP.WebAPI.Controllers
         public async Task<IQueryable<DepotGetAllQueryResponse>> GetAllDepots(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new DepotGetAllQuery(), cancellationToken);
+            return response;
+        }
+
+        [HttpGet("products")]
+        public async Task<IQueryable<ProductGetAllQueryResponse>> GetAllProducts(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new ProductGetAllQuery(), cancellationToken);
             return response;
         }
 

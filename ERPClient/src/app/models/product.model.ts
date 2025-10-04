@@ -2,7 +2,7 @@ export interface ProductModel {
     
     id: string,
     productName: string,
-    productType: string
+    productType: number
 
 }
 
@@ -10,6 +10,6 @@ export const initialProduct: ProductModel = {
 
     id: "",
     productName: "",
-    productType: ""
+    productType: 0
     
 }
