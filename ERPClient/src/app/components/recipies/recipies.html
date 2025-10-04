@@ -1,0 +1,152 @@
+<div class="content-wrapper">
+
+    <app-blank pageName="Recipies" [routes]="['Recipies']">
+
+        <app-section sectionTitle="List Of Recipies">
+
+            <div class="form-group mt-2">
+
+                <flexi-grid [data]="data()" [showCaption]="true" [showExportExcelBtn]="true" language="en"
+                    [loading]="loading()" exportExcelFileName="Recipies" (onrefresh)=" recipies.reload()">
+
+                    <ng-template flexiGridCaptionCommandTemplate>
+                        <flexi-button btnIcon="add" btnColor="primary" title="Add Recipe" (click)="openAddModal()"
+                            flexiTooltip />
+                    </ng-template>
+
+                    <flexi-grid-column field="product.productName" title="Product Name" />
+
+                    <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+
+                        <flexi-button (click)="deleteRecipe(item.id, item.product.productName)" cancelBtnText="Cancel"
+                            btnIcon="delete" btnColor="danger" title="Delete Recipe" btnSize="small" flexiTooltip />
+
+                    </ng-template>
+
+                </flexi-grid>
+
+            </div>
+
+            <!-- Create Modal -->
+            <div #addModal class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Add Recipe Form</h1>
+                        </div>
+
+                        <form #form="ngForm" (ngSubmit)="saveRecipe(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+
+                                    <label>Finished Products:</label>
+
+                                    <select class="form-select" [(ngModel)]="newRecipe().productId" name="productId"
+                                        required>
+
+                                        <option value="" disabled>Select Product</option>
+
+                                        @for(product of finishedProductList(); track product.id) {
+
+                                        <option [value]="product.id">{{ product.productName }}</option>
+
+                                        }
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group mt-2">
+
+                                    <div class="row d-flex justify-content-center align-items-center">
+
+                                        <div class="col-6">
+
+                                            <label>Semi-Finished Products:</label>
+
+                                            <select class="form-select" [(ngModel)]="detail().productId"
+                                                [ngModelOptions]="{standalone: true}" required>
+
+                                                <option value="" disabled>Select Product</option>
+
+                                                @for(product of semiFinishedProductList(); track product) {
+
+                                                <option [value]="product.id">{{ product.productName }}</option>
+
+                                                }
+
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-3">
+
+                                            <label>Quantity</label>
+                                            <input class="form-control" type="text" [(ngModel)]="detail().quantity"
+                                                [ngModelOptions]="{standalone: true}">
+
+                                        </div>
+
+                                        <div class="col-3 d-flex justify-content-center align-items-center mt-4">
+
+                                            <button type="button" class="btn btn-dark"
+                                                (click)="addDetail()">Add</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2">
+
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for(data of newRecipe().details; track data)
+                                                {
+                                                <tr>
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{data.product.productName}}</td>
+                                                    <td>{{data.quantity}}</td>
+                                                    <td>
+                                                        <button type="button" (click)="removeDetail($index)"
+                                                            class="btn btn-danger btn-sm pb-2">
+                                                            <span class="text-white hover-x">x</span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Recipe</button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </app-section>
+
+    </app-blank>
+
+</div>

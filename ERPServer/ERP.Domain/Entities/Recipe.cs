@@ -11,7 +11,7 @@ namespace ERP.Domain.Entities
     {
         public Guid ProductId { get; set; }
         public Product? Product { get; set; }
-        public List<RecipeDetail>? RecipeDetails { get; set; }
+        public List<RecipeDetail>? Details { get; set; }
     }
 
 }

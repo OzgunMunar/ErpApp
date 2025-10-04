@@ -14,7 +14,7 @@ namespace ERP.WebAPI.Controllers
     {
 
         [HttpPost]
-        public async Task<IActionResult> CreatRecipe(RecipeCreateCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateRecipe(RecipeCreateCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return StatusCode(response.StatusCode, response);

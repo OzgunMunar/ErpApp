@@ -1,0 +1,8 @@
+.hover-x {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.hover-x:hover {
+    color: white;
+}

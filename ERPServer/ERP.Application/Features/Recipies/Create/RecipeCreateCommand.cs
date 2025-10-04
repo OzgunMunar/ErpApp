@@ -33,11 +33,12 @@ namespace ERP.Application.Features.Recipies.Create
             Recipe recipe = new()
             {
                 ProductId = request.ProductId,
-                RecipeDetails = request.Details.Select(s => new RecipeDetail()
+                Details = request.Details.Select(s => new RecipeDetail()
                 {
                     ProductId = s.ProductId,
                     Quantity = s.Quantity
-                }).ToList()
+                })
+                .ToList()
             };
 
             await recipeRepository.AddAsync(recipe);

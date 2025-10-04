@@ -1,6 +1,8 @@
 ﻿using ERP.Application.Features.Customers.GetAll;
 using ERP.Application.Features.Depot.GetAll;
 using ERP.Application.Features.Products.GetAll;
+using ERP.Application.Features.Recipies.GetAll;
+using ERP.Domain.Entities;
 using ERP.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -57,6 +59,13 @@ namespace ERP.WebAPI.Controllers
         public async Task<IQueryable<ProductGetAllQueryResponse>> GetAllProducts(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new ProductGetAllQuery(), cancellationToken);
+            return response;
+        }
+
+        [HttpGet("recipies")]
+        public async Task<IQueryable<Recipe>> GetAllRecipies(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetAllRecipeQuery(), cancellationToken);
             return response;
         }
 

@@ -30,6 +30,12 @@ export const Menus: MenuModel[] = [
         icon: "far fa fa-boxes",
         url: "/products",
         isTitle: false
+    },   
+    {
+        name: "Recipies",
+        icon: "far fa fa-scroll",
+        url: "/recipies",
+        isTitle: false
     }
 
 ]

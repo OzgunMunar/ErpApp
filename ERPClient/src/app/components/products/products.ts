@@ -45,16 +45,6 @@ export default class Products {
   readonly #toastr = inject(FlexiToastService)
   readonly #http = inject(Http)
 
-  constructor() {
-
-    effect(() => {
-
-      // console.log(this.products.value())
-
-    })
-
-  }
-
   readonly data = computed(() => {
 
     return this.products.value()?.map((val, i) => {
