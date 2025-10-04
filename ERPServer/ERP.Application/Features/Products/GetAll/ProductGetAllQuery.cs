@@ -16,12 +16,6 @@ namespace ERP.Application.Features.Products.GetAll
             string ProductName,
             int ProductType
         );
-    //{
-    //    public Guid Id { get; set; }
-    //    public string ProductName { get; set; } = default!;
-    //    public int ProductType { get; set; }
-
-    //}
 
     internal sealed class ProductGetAllQueryHandler(
         
