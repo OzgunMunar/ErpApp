@@ -4,14 +4,16 @@ export interface RecipeDetailModel {
 
     id: string,
     productId: string,
-    product: ProductModel,
+    product?: ProductModel,
     quantity: number
 
 }
 
 export const initialRecipeDetailModel : RecipeDetailModel = {
+
     id: "",
     productId: "",
     product: {...initialProduct},
     quantity: 1
+    
 }

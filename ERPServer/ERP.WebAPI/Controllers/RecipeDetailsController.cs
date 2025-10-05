@@ -15,10 +15,10 @@ namespace ERP.WebAPI.Controllers
     public class RecipeDetailsController(IMediator mediator) : ApiController(mediator)
     {
 
-        [HttpPost]
-        public async Task<IActionResult> GetRecipeByIdWithDetails(GetRecipeByIdWithDetailsQuery request, CancellationToken cancellationToken)
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetRecipeByIdWithDetails(Guid id, CancellationToken cancellationToken)
         {
-            var response = await _mediator.Send(request, cancellationToken);
+            var response = await _mediator.Send(new GetRecipeByIdWithDetailsQuery(id), cancellationToken);
             return StatusCode(response.StatusCode, response);
         }
 
@@ -36,7 +36,7 @@ namespace ERP.WebAPI.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateRecipeDetail(RecipeDetailUpdateCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);

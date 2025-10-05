@@ -28,7 +28,9 @@ import { initialProductType, ProductTypeModel } from '../../models/product-type.
 
 export default class Products {
 
-  readonly products = httpResource<ProductModel[]>(() => "http://localhost:5113/odata/products")
+  // readonly products = httpResource<ProductModel[]>(() => "http://localhost:5113/odata/products")
+  readonly products = httpResource<{ value: ProductModel[] }>(() => "http://localhost:5113/odata/products")
+
   readonly productTypes = signal<ProductTypeModel[]>(productTypes)
 
   readonly newProduct = signal<ProductModel>({ ...initialProduct })
@@ -45,19 +47,17 @@ export default class Products {
   readonly #toastr = inject(FlexiToastService)
   readonly #http = inject(Http)
 
-  readonly data = computed(() => {
+  readonly data = computed(() => 
 
-    return this.products.value()?.map((val, i) => {
+    this.products.value()?.value.map((val) => ({
 
-      return {
-        ...val,
-        productTypeName: productTypes.find(pt => pt.value == val.productType)?.name ?? ""
+      ...val,
+      productTypeName: productTypes.find(pt => pt.value == val.productType)?.name ?? ""
 
-      } as ProductModel
+    })) ?? []
 
-    }) ?? []
+  );
 
-  })
 
   openAddModal() {
 
@@ -153,7 +153,8 @@ export default class Products {
 
   getValuesForUpdate(id: string) {
 
-    const product = this.products.value()?.find(product => product.id === id)
+    const product = this.products.value()?.value.find(product => product.id === id);
+
 
     if (!product) {
 

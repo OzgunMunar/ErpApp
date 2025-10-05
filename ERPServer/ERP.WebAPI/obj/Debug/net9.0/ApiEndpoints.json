@@ -160,6 +160,70 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ERP.WebAPI.Controllers.RecipeDetailsController",
+    "Method": "CreateRecipeDetail",
+    "RelativePath": "api/RecipeDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Application.Features.RecipeDetails.Create.RecipeDetailCreateCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.WebAPI.Controllers.RecipeDetailsController",
+    "Method": "UpdateRecipeDetail",
+    "RelativePath": "api/RecipeDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Application.Features.RecipeDetails.Update.RecipeDetailUpdateCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.WebAPI.Controllers.RecipeDetailsController",
+    "Method": "GetRecipeByIdWithDetails",
+    "RelativePath": "api/RecipeDetails/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.WebAPI.Controllers.RecipeDetailsController",
+    "Method": "DeleteRecipeDetail",
+    "RelativePath": "api/RecipeDetails/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ERP.WebAPI.Controllers.RecipiesController",
     "Method": "CreateRecipe",
     "RelativePath": "api/Recipies",

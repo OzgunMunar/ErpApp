@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+
+    <app-blank pageName="{{recipe().product.productName}} Recipe Detail"
+        [routes]="[recipe().product.productName + ' Recipe Detail']">
+
+        <app-section sectionTitle="{{recipe().product.productName}} Recipe Detail">
+
+            <flexi-grid 
+                [data]="recipeDetails()" 
+                [showCaption]="true" 
+                [showExportExcelBtn]="true" 
+                language="en"
+                exportExcelFileName="Recipe Details" 
+                (onrefresh)="getRecipeById(recipeId())">
+
+                <flexi-grid-column field="product.productName" title="Product Name" />
+                <flexi-grid-column field="quantity" title="Quantity" />
+
+                <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+
+                    <flexi-button cancelBtnText="Cancel" btnIcon="delete" btnColor="danger" title="Delete Recipe Detail"
+                        btnSize="small" (click)="deleteRecipeDetail(item)" flexiTooltip />
+
+                </ng-template>
+
+            </flexi-grid>
+
+
+        </app-section>
+
+    </app-blank>
+
+
+</div>

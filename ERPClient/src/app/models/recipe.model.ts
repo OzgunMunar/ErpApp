@@ -1,5 +1,5 @@
 import { initialProduct, ProductModel } from "./product.model";
-import { initialRecipeDetailModel, RecipeDetailModel } from "./recipe-detail.model";
+import { RecipeDetailModel } from "./recipe-detail.model";
 
 export interface RecipeModel {
 

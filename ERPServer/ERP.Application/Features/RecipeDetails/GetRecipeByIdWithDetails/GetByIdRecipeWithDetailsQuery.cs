@@ -15,15 +15,15 @@ namespace ERP.Application.Features.RecipeDetails.GetRecipeByIdWithDetails
     {
         public async Task<Result<Recipe>> Handle(GetRecipeByIdWithDetailsQuery request, CancellationToken cancellationToken)
         {
-            
+
             Recipe? recipe = await recipeRepository
-                .Where(p => p.Id == request.Id)
+                .Where(p => p.Id == request.Id && !p.IsDeleted)
                 .Include(p => p.Product)
-                .Include(p => p.Details!)
-                .ThenInclude(p => p.Product)
+                .Include(p => p.Details!.Where(d => !d.IsDeleted))
+                    .ThenInclude(d => d.Product)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if(recipe is null)
+            if (recipe is null)
             {
                 return Result<Recipe>.Failure(404, "Recipe not found");
             }

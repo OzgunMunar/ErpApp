@@ -14,12 +14,31 @@
                             flexiTooltip />
                     </ng-template>
 
-                    <flexi-grid-column field="product.productName" title="Product Name" />
+                    <flexi-grid-column field="productName" title="Product Name" />
 
-                    <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
+                    <ng-template flexiGridColumnCommandTemplate let-item>
 
-                        <flexi-button (click)="deleteRecipe(item.id, item.product.productName)" cancelBtnText="Cancel"
-                            btnIcon="delete" btnColor="danger" title="Delete Recipe" btnSize="small" flexiTooltip />
+                        <div class="d-flex gap-2 justify-content-center w-100">
+
+                            <flexi-button 
+                                (click)="deleteRecipe(item.id, item.product.productName)" 
+                                cancelBtnText="Cancel"
+                                btnIcon="delete"
+                                btnColor="danger" 
+                                title="Delete Recipe" 
+                                btnSize="small" 
+                                flexiTooltip />
+
+                            <flexi-button 
+                                [routerLink]="['/recipe-details', item.id]"
+                                cancelBtnText="Cancel"
+                                btnIcon="info"
+                                btnColor="info" 
+                                title="Recipe Info" 
+                                btnSize="small" 
+                                flexiTooltip />
+
+                        </div>
 
                     </ng-template>
 
@@ -48,7 +67,7 @@
 
                                         <option value="" disabled>Select Product</option>
 
-                                        @for(product of finishedProductList(); track product.id) {
+                                        @for(product of finishedProductList(); track product) {
 
                                         <option [value]="product.id">{{ product.productName }}</option>
 
@@ -112,13 +131,15 @@
                                                 {
                                                 <tr>
                                                     <td>{{$index + 1}}</td>
-                                                    <td>{{data.product.productName}}</td>
+                                                    <td>{{data.product?.productName}}</td>
                                                     <td>{{data.quantity}}</td>
                                                     <td>
+
                                                         <button type="button" (click)="removeDetail($index)"
-                                                            class="btn btn-danger btn-sm pb-2">
-                                                            <span class="text-white hover-x">x</span>
+                                                            class="btn btn-danger btn-sm">
+                                                            <i class="fa-solid fa-trash"></i>
                                                         </button>
+
                                                     </td>
                                                 </tr>
                                                 }

@@ -34,6 +34,8 @@ namespace ERP.WebAPI.Controllers
 
             builder.EntitySet<CustomersGetAllQueryResponse>("customers");
             builder.EntitySet<DepotGetAllQueryResponse>("depots");
+            builder.EntitySet<ProductGetAllQueryResponse>("products");
+            builder.EntitySet<Recipe>("recipies");
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();

@@ -42,6 +42,33 @@ export class Http {
       });
   }
 
+   getByIdRouteParam<T>(
+    apiUrl: string,
+    id: number | string,
+    callBack: (res: ResultModel<T>) => void,
+    errorCallBack?: (err: HttpErrorResponse) => void
+  ) {
+
+    let headers = new HttpHeaders();
+    
+    headers = headers.set('Authorization', `Bearer ${this.auth.token}`);
+
+    this.http.get<ResultModel<T>>(`${api}/${apiUrl}/${id}`, { headers })
+      .subscribe({
+        next: (res) => {
+          
+          callBack(res);
+          
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorService.errorHandler(err);
+          if (errorCallBack !== undefined) {
+            errorCallBack(err);
+          }
+        }
+      });
+  }
+
   post<T>(
     apiUrl: string,
     body: any,

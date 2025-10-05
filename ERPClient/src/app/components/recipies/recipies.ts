@@ -11,6 +11,7 @@ import { ResultModel } from '../../models/result.model';
 import { ProductModel } from '../../models/product.model';
 import { initialRecipe, RecipeModel } from '../../models/recipe.model';
 import { initialRecipeDetailModel, RecipeDetailModel } from '../../models/recipe-detail.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
 
@@ -19,7 +20,8 @@ import { initialRecipeDetailModel, RecipeDetailModel } from '../../models/recipe
     Section,
     Blank,
     FlexiGridModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './recipies.html',
   styleUrl: './recipies.css'
@@ -28,20 +30,41 @@ import { initialRecipeDetailModel, RecipeDetailModel } from '../../models/recipe
 
 export default class Recipies {
 
-  readonly recipies = httpResource<RecipeModel[]>(() => "http://localhost:5113/odata/recipies")
-  readonly products = httpResource<ProductModel[]>(() => "http://localhost:5113/odata/products")
+  readonly recipies = httpResource<ODataResponse<RecipeModel>>(() => "http://localhost:5113/odata/recipies")
+  readonly products = httpResource<ODataResponse<ProductModel>>(() => "http://localhost:5113/odata/products");
 
-  readonly data = computed<RecipeModel[]>(() => this.recipies.value() ?? [])
-  readonly productsList = computed<ProductModel[]>(() => this.products.value() ?? [])
-  readonly semiFinishedProductList = computed<ProductModel[]>(() => 
+  readonly data = computed(() => {
+
+    const recipes = this.recipies.value()?.value ?? [];
+    const products = this.products.value()?.value ?? [];
+
+    return recipes.map(recipe => {
+
+      const relatedProduct = products.find(p => p.id === recipe.productId)
+
+      return {
+
+        ...recipe,
+        productName: relatedProduct?.productName
+
+      }
+
+    })
     
-    (this.products.value() ?? []).filter(prod => prod.productType == 2)
-    
+  })
+
+  readonly productsList = computed<ProductModel[]>(() => this.products.value()?.value ?? [])
+
+  readonly semiFinishedProductList = computed<ProductModel[]>(() =>
+
+    (this.products.value()?.value ?? []).filter(prod => prod.productType === 2)
+
   )
-  readonly finishedProductList = computed<ProductModel[]>(() => 
-    
-    (this.products.value() ?? []).filter(prod => prod.productType == 1)
-    
+
+  readonly finishedProductList = computed<ProductModel[]>(() =>
+
+    (this.products.value()?.value ?? []).filter(prod => prod.productType == 1)
+
   )
 
   readonly productId = signal<string>("")
@@ -56,17 +79,6 @@ export default class Recipies {
 
   readonly #toastr = inject(FlexiToastService)
   readonly #http = inject(Http)
-
-  constructor() {
-
-    effect(() => {
-
-      // console.log("recipies:", this.recipies.value());
-      // console.log("data:", this.data());
-
-    })
-
-  }
 
   openAddModal() {
 
@@ -144,7 +156,7 @@ export default class Recipies {
 
   addDetail() {
 
-    const relatedProduct = this.productsList().find(p => p.id == this.detail().productId)
+    const relatedProduct = this.products.value()?.value.find(p => p.id === this.detail().productId);
 
     if (relatedProduct) {
 
