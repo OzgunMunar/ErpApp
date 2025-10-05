@@ -3,7 +3,6 @@ using ERP.Application.Features.Depot.GetAll;
 using ERP.Application.Features.Products.GetAll;
 using ERP.Application.Features.Recipies.GetAll;
 using ERP.Domain.Entities;
-using ERP.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
-using System.Reflection;
 
 namespace ERP.WebAPI.Controllers
 {

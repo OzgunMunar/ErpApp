@@ -1,12 +1,6 @@
 ﻿using ERP.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TS.Result;
 
 namespace ERP.Application.Features.Depot.GetAll
 {

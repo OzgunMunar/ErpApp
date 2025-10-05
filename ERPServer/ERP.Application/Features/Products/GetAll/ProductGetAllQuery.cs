@@ -1,9 +1,6 @@
-﻿using ERP.Domain.Abstractions;
-using ERP.Domain.Entities;
-using ERP.Domain.Repositories;
+﻿using ERP.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using TS.Result;
 
 namespace ERP.Application.Features.Products.GetAll
 {

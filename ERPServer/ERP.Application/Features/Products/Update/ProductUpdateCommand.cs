@@ -1,5 +1,4 @@
-﻿using ERP.Application.Features.Products.Create;
-using ERP.Domain.Entities;
+﻿using ERP.Domain.Entities;
 using ERP.Domain.Enums;
 using ERP.Domain.Repositories;
 using GenericRepository;

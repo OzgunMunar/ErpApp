@@ -1,12 +1,8 @@
-﻿using ERP.Application.Features.Customers.Create;
-using ERP.Application.Features.Customers.Delete;
-using ERP.Application.Features.Customers.Update;
-using ERP.Application.Features.Depot.Create;
+﻿using ERP.Application.Features.Depot.Create;
 using ERP.Application.Features.Depot.Delete;
 using ERP.Application.Features.Depot.Update;
 using ERP.WebAPI.Abstractions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP.WebAPI.Controllers
