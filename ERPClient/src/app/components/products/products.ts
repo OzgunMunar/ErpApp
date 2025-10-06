@@ -28,7 +28,6 @@ import { initialProductType, ProductTypeModel } from '../../models/product-type.
 
 export default class Products {
 
-  // readonly products = httpResource<ProductModel[]>(() => "http://localhost:5113/odata/products")
   readonly products = httpResource<{ value: ProductModel[] }>(() => "http://localhost:5113/odata/products")
 
   readonly productTypes = signal<ProductTypeModel[]>(productTypes)
@@ -57,7 +56,6 @@ export default class Products {
     })) ?? []
 
   );
-
 
   openAddModal() {
 

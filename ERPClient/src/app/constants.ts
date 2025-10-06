@@ -12,3 +12,20 @@ export const productTypes = [
     }
 
 ]
+
+export const orderStatus = [
+
+    {
+        name: "Pending",
+        value: 1
+    },
+    {
+        name: "Requirement Plan Pending",
+        value: 2
+    },
+    {
+        name: "Completed",
+        value: 3
+    },
+
+]

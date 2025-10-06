@@ -1354,7 +1354,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1362,7 +1362,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1370,7 +1370,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1378,7 +1378,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1386,7 +1386,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1394,7 +1394,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1402,7 +1402,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1410,7 +1410,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1418,7 +1418,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1426,7 +1426,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1434,7 +1434,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1442,7 +1442,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1450,7 +1450,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1458,7 +1458,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1466,7 +1466,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1474,7 +1474,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1482,7 +1482,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1490,7 +1490,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1498,7 +1498,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1506,7 +1506,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1514,7 +1514,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1522,7 +1522,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1530,7 +1530,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1538,7 +1538,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1546,7 +1546,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1554,7 +1554,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1562,7 +1562,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1570,7 +1570,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1578,7 +1578,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1586,7 +1586,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1594,7 +1594,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1602,7 +1602,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1610,7 +1610,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1618,7 +1618,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1626,7 +1626,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1634,7 +1634,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1642,7 +1642,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1650,7 +1650,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1658,7 +1658,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               },
@@ -1666,7 +1666,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/OrdersGetAllQueryResponse"
                   }
                 }
               }
@@ -5517,76 +5517,6 @@
         },
         "additionalProperties": false
       },
-      "Order": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdUserId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "updatedUserId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "deletedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "deletedUserId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "customerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/Customer"
-          },
-          "orderNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "orderedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "deliveryDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "$ref": "#/components/schemas/OrderStatusEnum"
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrderDetail"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "OrderCreateCommand": {
         "type": "object",
         "properties": {
@@ -5596,11 +5526,11 @@
           },
           "orderedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "deliveryDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "details": {
             "type": "array",
@@ -5608,6 +5538,10 @@
               "$ref": "#/components/schemas/OrderDetailDto"
             },
             "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5690,22 +5624,6 @@
         },
         "additionalProperties": false
       },
-      "OrderStatusEnum": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "value": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
       "OrderUpdateCommand": {
         "type": "object",
         "properties": {
@@ -5719,16 +5637,60 @@
           },
           "orderedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "deliveryDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "details": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrderDetailDto"
+            },
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdersGetAllQueryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "orderNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderedDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "deliveryDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderDetail"
             },
             "nullable": true
           }

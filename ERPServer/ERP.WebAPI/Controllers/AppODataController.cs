@@ -37,7 +37,7 @@ namespace ERP.WebAPI.Controllers
             builder.EntitySet<DepotGetAllQueryResponse>("depots");
             builder.EntitySet<ProductGetAllQueryResponse>("products");
             builder.EntitySet<Recipe>("recipies");
-            builder.EntitySet<Order>("orders");
+            builder.EntitySet<OrdersGetAllQueryResponse>("orders");
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();
@@ -72,11 +72,11 @@ namespace ERP.WebAPI.Controllers
         }
 
         [HttpGet("orders")]
-        public async Task<IQueryable<Order>> GetAllOrders(CancellationToken cancellationToken)
+        public async Task<IQueryable<OrdersGetAllQueryResponse>> GetAllOrders(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new OrdersGetAllQuery(), cancellationToken);
             return response;
         }
-
+        
     }
 }

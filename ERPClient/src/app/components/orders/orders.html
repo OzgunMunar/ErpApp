@@ -26,11 +26,12 @@
 
                     </ng-template>
 
-                    <flexi-grid-column field="orderedDate" title="Ordered Date" />
+                    <flexi-grid-column field="orderedDate" title="Ordered Date (Day/Month/Year)" />
                     <flexi-grid-column field="orderNumber" title="Order Number" />
                     <flexi-grid-column field="customer.fullName" title="Customer Name" />
                     <flexi-grid-column field="deliveryDate" title="Delivery Date" />
                     <flexi-grid-column field="customerFullAddress" title="Customer Address" />
+                    <flexi-grid-column field="statusName" title="Order Status" />
 
                     <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
 
@@ -39,8 +40,8 @@
                             btnColor="info" 
                             title="Edit Order Info" 
                             btnSize="small"
-                            (click)="openUpdateModal(item.id)" 
                             flexiTooltip />
+                            <!-- (click)="openUpdateModal(item.id)"  -->
 
                         <flexi-button 
                             (click)="deleteOrder(item)" 
@@ -59,7 +60,7 @@
 
             <!-- Create Modal -->
             <div #addModal class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5">Add Order Form</h1>
@@ -69,36 +70,160 @@
 
                             <div class="modal-body">
 
-                                <!-- <div class="form-group">
+                                 <div class="form-group">
 
-                                    <label>Depot Name:</label>
-                                    <input #addFirstInput type="text" [(ngModel)]="newDepot().depotName"
-                                        name="depotName" class="form-control" minlength="3" required>
+                                    <label>Order Date:</label>
+                                    <input #addFirstInput 
+                                        type="date" 
+                                        [(ngModel)]="newOrder().orderedDate"
+                                        name="orderedDate" 
+                                        class="form-control"  
+                                        required>
                                 </div>
 
-                                <div class="form-group mt-3">
+                                <div class="form-group mt-2">
 
-                                    <label>City:</label>
-                                    <input type="text" [(ngModel)]="newDepot().city" name="city" class="form-control"
-                                        minlength="3" required>
+                                    <label>Customer:</label>
+                                    <select 
+                                        class="form-select" 
+                                        name="customer" 
+                                        [(ngModel)]="newOrder().customerId"
+                                        required>
+
+                                        @for(customer of customerData(); track customer) 
+                                        {
+
+                                            <option [value]="customer.id">{{customer.fullName}}</option>
+
+                                        }
+
+                                    </select>
 
                                 </div>
+                                
+                                 <div class="form-group mt-2">
 
-                                <div class="form-group mt-3">
-
-                                    <label>Town:</label>
-                                    <input type="text" [(ngModel)]="newDepot().town" name="town" class="form-control"
-                                        minlength="3" required>
-
+                                    <label>Delivery Date:</label>
+                                    <input 
+                                        type="date" 
+                                        [(ngModel)]="newOrder().deliveryDate"
+                                        name="deliveryDate" 
+                                        class="form-control" 
+                                        required>
                                 </div>
 
-                                <div class="form-group mt-3">
+                                <hr>
+                                <div class="form-group mt-2">
+                                    <div class="row">
 
-                                    <label>Street:</label>
-                                    <input type="text" [(ngModel)]="newDepot().street" name="street"
-                                        class="form-control" minlength="3" required>
+                                        <div class="col-2">
 
-                                </div> -->
+                                            <div class="form-group">
+                                                <label>Product:</label>
+                                                <select 
+                                                    class="form-select" 
+                                                    [(ngModel)]="detail().productId"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    required>
+
+                                                    @for(product of productData(); track product) 
+                                                    {
+                                                    
+                                                        <option [value]="product.id">{{product.productName}}</option>
+                                                    
+                                                    }
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Quantity:</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control"
+                                                    [(ngModel)]="detail().quantity"
+                                                    [ngModelOptions]="{standalone: true}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Price:</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control"
+                                                    [(ngModel)]="detail().price"
+                                                    [ngModelOptions]="{standalone: true}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Total:</label>
+                                                <br>
+                                                <label class="alert alert-success p-2 m-0 w-full col-12" style="line-height: 1.2;">{{ detail().price * detail().quantity }}</label>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-4 d-flex justify-content-center align-items-center mt-3">
+                                            <button type="button" (click)="addDetail()" class="btn btn-dark">
+                                                Add 
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-2">
+
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Total</th>
+                                                    <th>Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for(data of newOrder().details; track data)
+                                                {
+                                                <tr>
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{data.product.productName}}</td>
+                                                    <td>{{data.quantity}}</td>
+                                                    <td>{{data.price}}</td>
+                                                    <td>{{data.quantity * data.quantity}}</td>
+                                                    <td>
+                                                        <button type="button" (click)="removeDetail($index)"
+                                                            class="btn btn-danger btn-sm">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -113,61 +238,7 @@
                 </div>
             </div>
 
-            <!-- Update Modal -->
-            <div #updateModal class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">Update Order Form</h1>
-                        </div>
 
-                        <form #form="ngForm" (ngSubmit)="updateOrder(form)" autocomplete="off">
-
-                            <div class="modal-body">
-
-                                <!-- <div class="form-group">
-
-                                    <label>Depot Name:</label>
-                                    <input #addFirstInput type="text" [(ngModel)]="updateDepotValues().depotName"
-                                        name="depotName" class="form-control" minlength="3" required>
-                                </div>
-
-                                <div class="form-group mt-3">
-
-                                    <label>City:</label>
-                                    <input type="text" [(ngModel)]="updateDepotValues().city" name="city" class="form-control"
-                                        minlength="3" required>
-
-                                </div>
-
-                                <div class="form-group mt-3">
-
-                                    <label>Town:</label>
-                                    <input type="text" [(ngModel)]="updateDepotValues().town" name="town" class="form-control"
-                                        minlength="3" required>
-
-                                </div>
-
-                                <div class="form-group mt-3">
-
-                                    <label>Street:</label>
-                                    <input type="text" [(ngModel)]="updateDepotValues().street" name="street"
-                                        class="form-control" minlength="3" required>
-
-                                </div> -->
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-info">Update Order</button>
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-            </div>
 
         </app-section>
 

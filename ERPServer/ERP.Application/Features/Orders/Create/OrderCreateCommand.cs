@@ -1,7 +1,10 @@
-﻿using ERP.Domain.Dtos;
+﻿using ERP.Application.Features.Products.Create;
+using ERP.Domain.Dtos;
 using ERP.Domain.Entities;
+using ERP.Domain.Enums;
 using ERP.Domain.Repositories;
 using GenericRepository;
+using Mapster;
 using MapsterMapper;
 using MediatR;
 using TS.Result;
@@ -11,9 +14,10 @@ namespace ERP.Application.Features.Orders.Create
     public sealed record OrderCreateCommand
         (
             Guid CustomerId,
-            DateTime OrderedDate,
-            DateTime DeliveryDate,
-            List<OrderDetailDto> Details
+            DateOnly OrderedDate,
+            DateOnly DeliveryDate,
+            List<OrderDetailDto> Details,
+            int Status
         )
         : IRequest<Result<string>>;
 
@@ -26,24 +30,11 @@ namespace ERP.Application.Features.Orders.Create
         public async Task<Result<string>> Handle(OrderCreateCommand request, CancellationToken cancellationToken)
         {
 
-            //List<OrderDetail> details = request.Details
-            //    .Select(detail => new OrderDetail
-            //    {
-            //        Price = detail.Price,
-            //        ProductId = detail.ProductId,
-            //        Quantity = detail.Quantity,
-            //    }).ToList();
+            var config = new TypeAdapterConfig();
+            config.NewConfig<OrderCreateCommand, Order>()
+                .Map(dest => dest.Status, src => OrderStatusEnum.FromValue(src.Status));
 
-            //Order order = new()
-            //{
-            //    CustomerId = request.CustomerId,
-            //    OrderedDate = request.OrderedDate,
-            //    DeliveryDate = request.DeliveryDate,
-
-            //    Details = details
-            //};
-
-            Order order = mapper.Map<Order>(request);
+            Order order = mapper.Adapt<Order>(config);
             order.OrderNumber = $"ERP-{DateTime.Now.Year}-{Guid.NewGuid().ToString().Split('-').Last().ToUpper()}";
 
             await orderRepository.AddAsync(order, cancellationToken);

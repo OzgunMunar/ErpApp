@@ -555,7 +555,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Linq.IQueryable\u00601[[ERP.Domain.Entities.Order, ERP.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Linq.IQueryable\u00601[[ERP.Application.Features.Orders.GetAll.OrdersGetAllQueryResponse, ERP.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",

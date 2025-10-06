@@ -32,7 +32,9 @@ export default class Recipies {
 
   readonly recipies = httpResource<ODataResponse<RecipeModel>>(() => "http://localhost:5113/odata/recipies")
   readonly products = httpResource<ODataResponse<ProductModel>>(() => "http://localhost:5113/odata/products");
-
+  
+  readonly productsList = computed<ProductModel[]>(() => this.products.value()?.value ?? [])
+  
   readonly data = computed(() => {
 
     const recipes = this.recipies.value()?.value ?? [];
@@ -53,7 +55,6 @@ export default class Recipies {
     
   })
 
-  readonly productsList = computed<ProductModel[]>(() => this.products.value()?.value ?? [])
 
   readonly semiFinishedProductList = computed<ProductModel[]>(() =>
 
