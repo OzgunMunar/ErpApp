@@ -1,5 +1,6 @@
 ﻿using ERP.Application.Features.Customers.GetAll;
 using ERP.Application.Features.Depot.GetAll;
+using ERP.Application.Features.Orders.GetAll;
 using ERP.Application.Features.Products.GetAll;
 using ERP.Application.Features.Recipies.GetAll;
 using ERP.Domain.Entities;
@@ -36,6 +37,7 @@ namespace ERP.WebAPI.Controllers
             builder.EntitySet<DepotGetAllQueryResponse>("depots");
             builder.EntitySet<ProductGetAllQueryResponse>("products");
             builder.EntitySet<Recipe>("recipies");
+            builder.EntitySet<Order>("orders");
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();
@@ -66,6 +68,13 @@ namespace ERP.WebAPI.Controllers
         public async Task<IQueryable<Recipe>> GetAllRecipies(CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetAllRecipeQuery(), cancellationToken);
+            return response;
+        }
+
+        [HttpGet("orders")]
+        public async Task<IQueryable<Order>> GetAllOrders(CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new OrdersGetAllQuery(), cancellationToken);
             return response;
         }
 

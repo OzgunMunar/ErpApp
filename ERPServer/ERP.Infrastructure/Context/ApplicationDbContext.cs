@@ -35,6 +35,8 @@ namespace ERP.Infrastructure.Context
         public DbSet<Product> Products { get; set; } = default!;
         public DbSet<Recipe> Recipes { get; set; } = default!;
         public DbSet<RecipeDetail> RecipeDetails { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
