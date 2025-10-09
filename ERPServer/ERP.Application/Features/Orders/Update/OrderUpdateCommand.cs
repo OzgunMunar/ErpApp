@@ -13,7 +13,7 @@ namespace ERP.Application.Features.Orders.Update
 {
 
     public sealed record OrderUpdateCommand(
-        
+
         Guid Id,
         Guid CustomerId,
         DateOnly OrderedDate,
@@ -25,6 +25,7 @@ namespace ERP.Application.Features.Orders.Update
 
     internal sealed class UpdateOrderCommandHandler(
         IOrderRepository orderRepository,
+        IOrderDetailRepository orderDetailRepository,
         IUnitOfWork unitOfWork,
         IMapper mapper)
         : IRequestHandler<OrderUpdateCommand, Result<string>>
@@ -33,8 +34,10 @@ namespace ERP.Application.Features.Orders.Update
         {
 
             Order? order = await orderRepository
-                .Where(or =>
-                    or.Id == request.Id)
+                .WhereWithTracking(or =>
+                    or.Id == request.Id
+                    &&
+                    or.IsDeleted == false)
                 .Include(d => d.Details)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -43,19 +46,44 @@ namespace ERP.Application.Features.Orders.Update
                 return Result<string>.Failure(404, "Order not found.");
             }
 
-            foreach (var item in order.Details!)
+            foreach (var existingDetail in order.Details!)
             {
-                item.IsDeleted = true;
+                var incomingDetail = request.Details.FirstOrDefault(d => d.ProductId == existingDetail.ProductId);
+
+                if (incomingDetail is not null)
+                {
+                    existingDetail.Quantity = incomingDetail.Quantity;
+                    existingDetail.Price = incomingDetail.Price;
+                    existingDetail.IsDeleted = false;
+                }
+                else
+                {
+                    existingDetail.IsDeleted = true;
+                }
             }
 
-            var config = new TypeAdapterConfig();
-            config.NewConfig<OrderUpdateCommand, Order>()
-                .Map(dest => dest.Status, src => OrderStatusEnum.FromValue(src.Status));
+            var existingProductIds = order.Details.Select(d => d.ProductId).ToHashSet();
 
-            mapper = new Mapper(config);
-            mapper.Map(request, order);
+            var newDetails = request.Details
+                .Where(d => !existingProductIds.Contains(d.ProductId))
+                .Select(d => new OrderDetail
+                {
+                    Id = Guid.NewGuid(),
+                    OrderId = order.Id,
+                    ProductId = d.ProductId,
+                    Quantity = d.Quantity,
+                    Price = d.Price,
+                    IsDeleted = false
+                })
+                .ToList();
 
-            orderRepository.Update(order);
+            order.Details.AddRange(newDetails);
+
+            order.CustomerId = request.CustomerId;
+            order.OrderedDate = request.OrderedDate;
+            order.DeliveryDate = request.DeliveryDate;
+            order.Status = OrderStatusEnum.FromValue(request.Status);
+
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result<string>.Succeed("Order successfully updated");

@@ -38,6 +38,10 @@ namespace ERP.WebAPI.Controllers
             builder.EntitySet<ProductGetAllQueryResponse>("products");
             builder.EntitySet<Recipe>("recipies");
             builder.EntitySet<OrdersGetAllQueryResponse>("orders");
+            //builder.EntitySet<OrderDetail>("orderdetails");
+
+            builder.ComplexType<OrderDetail>();
+            builder.ComplexType<Product>();
             //builder.EntitySet<AppRole>("roles");
 
             return builder.GetEdmModel();

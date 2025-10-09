@@ -40,8 +40,8 @@
                             btnColor="info" 
                             title="Edit Order Info" 
                             btnSize="small"
+                            (click)="openUpdateModal(item.id)" 
                             flexiTooltip />
-                            <!-- (click)="openUpdateModal(item.id)"  -->
 
                         <flexi-button 
                             (click)="deleteOrder(item)" 
@@ -181,7 +181,7 @@
                                         </div>
 
                                         <div class="col-4 d-flex justify-content-center align-items-center mt-3">
-                                            <button type="button" (click)="addDetail()" class="btn btn-dark">
+                                            <button type="button" (click)="addDetail('create')" class="btn btn-dark">
                                                 Add 
                                             </button>
                                         </div>
@@ -209,9 +209,9 @@
                                                     <td>{{data.product.productName}}</td>
                                                     <td>{{data.quantity}}</td>
                                                     <td>{{data.price}}</td>
-                                                    <td>{{data.quantity * data.quantity}}</td>
+                                                    <td>{{data.quantity * data.price}}</td>
                                                     <td>
-                                                        <button type="button" (click)="removeDetail($index)"
+                                                        <button type="button" (click)="removeDetail($index, 'create')"
                                                             class="btn btn-danger btn-sm">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
@@ -238,7 +238,185 @@
                 </div>
             </div>
 
+            <!-- Update Modal -->
+            <div #updateModal class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Update Order Form</h1>
+                        </div>
 
+                        <form #form="ngForm" (ngSubmit)="updateOrder(form)" autocomplete="off">
+
+                            <div class="modal-body">
+
+                                 <div class="form-group">
+
+                                    <label>Order Date:</label>
+                                    <input #addFirstInput 
+                                        type="date" 
+                                        [(ngModel)]="updateOrderValues().orderedDate"
+                                        name="orderedDate" 
+                                        class="form-control"  
+                                        required>
+                                </div>
+
+                                <div class="form-group mt-2">
+
+                                    <label>Customer:</label>
+                                    <select 
+                                        class="form-select" 
+                                        name="customer" 
+                                        [(ngModel)]="updateOrderValues().customerId"
+                                        required>
+
+                                        @for(customer of customerData(); track customer) 
+                                        {
+
+                                            <option [value]="customer.id">{{customer.fullName}}</option>
+
+                                        }
+
+                                    </select>
+
+                                </div>
+                                
+                                 <div class="form-group mt-2">
+
+                                    <label>Delivery Date:</label>
+                                    <input 
+                                        type="date" 
+                                        [(ngModel)]="updateOrderValues().deliveryDate"
+                                        name="deliveryDate" 
+                                        class="form-control" 
+                                        required>
+                                </div>
+
+                                <hr>
+                                <div class="form-group mt-2">
+                                    <div class="row">
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                <label>Product:</label>
+                                                <select 
+                                                    class="form-select" 
+                                                    [(ngModel)]="detail().productId"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    required>
+
+                                                    @for(product of productData(); track product) 
+                                                    {
+                                                    
+                                                        <option [value]="product.id">{{product.productName}}</option>
+                                                    
+                                                    }
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Quantity:</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control"
+                                                    [(ngModel)]="detail().quantity"
+                                                    [ngModelOptions]="{standalone: true}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Price:</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control"
+                                                    [(ngModel)]="detail().price"
+                                                    [ngModelOptions]="{standalone: true}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+
+                                                <label>Total:</label>
+                                                <br>
+                                                <label class="alert alert-success p-2 m-0 w-full col-12" style="line-height: 1.2;">{{ detail().price * detail().quantity }}</label>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-4 d-flex justify-content-center align-items-center mt-3">
+                                            <button type="button" (click)="addDetail('update')" class="btn btn-dark">
+                                                Add 
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-2">
+
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Total</th>
+                                                    <th>Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for(data of updateOrderValues().details; track data)
+                                                {
+                                                <tr>
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{data.product.productName}}</td>
+                                                    <td>{{data.quantity}}</td>
+                                                    <td>{{data.price}}</td>
+                                                    <td>{{data.quantity * data.quantity}}</td>
+                                                    <td>
+                                                        <button type="button" (click)="removeDetail($index, 'update')"
+                                                            class="btn btn-danger btn-sm">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Update Order</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
 
         </app-section>
 

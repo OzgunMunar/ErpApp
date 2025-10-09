@@ -47,10 +47,8 @@ export default class Orders {
 
   readonly datePipe = inject(DatePipe)
 
-  @ViewChild('addFirstInput') addFirstInput!: ElementRef<HTMLInputElement>
-  @ViewChild('updateFirstInput') updateFirstInput!: ElementRef<HTMLInputElement>
   @ViewChild('addModal') addModalRef!: ElementRef<HTMLDivElement>;
-  // @ViewChild('updateModal') updateModalRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('updateModal') updateModalRef!: ElementRef<HTMLDivElement>;
 
   readonly #toastr = inject(FlexiToastService)
   readonly #http = inject(Http)
@@ -78,17 +76,6 @@ export default class Orders {
 
   })
 
-
-  constructor() {
-
-    effect(() => {
-
-      console.log(this.data())
-
-    })
-
-  }
-
   readonly customerData = computed<CustomerModel[]>(() => this.customers.value()?.value ?? [])
   readonly productData = computed<ProductModel[]>(() => this.products.value()?.value ?? [])
 
@@ -99,30 +86,22 @@ export default class Orders {
     const modalEl = this.addModalRef.nativeElement
     const modal = new bootstrap.Modal(modalEl)
 
-    modalEl.addEventListener('shown.bs.modal', () => {
-      this.addFirstInput?.nativeElement.focus()
-    }, { once: true })
+    modal.show()
+
+  }
+
+  openUpdateModal(id: string) {
+
+    const modalEl = this.updateModalRef.nativeElement
+    const modal = new bootstrap.Modal(modalEl)
+
+    this.getValuesForUpdate(id)
 
     modal.show()
 
   }
 
-  // openUpdateModal(id: string) {
-
-  //   const modalEl = this.updateModalRef.nativeElement
-  //   const modal = new bootstrap.Modal(modalEl)
-
-  //   modalEl.addEventListener('shown.bs.modal', () => {
-  //     this.updateFirstInput?.nativeElement.focus()
-  //   }, { once: true })
-
-  //   this.getValuesForUpdate(id)
-
-  //   modal.show()
-
-  // }
-
-  addDetail() {
+  addDetail(operation: string) {
 
     const relatedProduct = this.products.value()?.value.find(p => p.id == this.detail().productId)
 
@@ -133,19 +112,41 @@ export default class Orders {
 
     }
 
-    this.newOrder().details.push(this.detail())
+    if(operation === "create") {
+
+      this.newOrder().details.push(this.detail())
+
+    } else {
+
+      this.updateOrderValues().details.push(this.detail())
+      
+    }
+
     this.detail.set({ ...initialOrderDetailModel })
 
   }
 
-  removeDetail(index: number) {
+  removeDetail(index: number, operation: string) {
 
-    this.newOrder.update(val => ({
+    if (operation === "create") {
 
-      ...val,
-      details: val.details.filter((_, i) => i !== index)
+      this.newOrder.update(val => ({
 
-    }))
+        ...val,
+        details: val.details.filter((_, i) => i !== index)
+
+      }))
+
+    } else {
+
+      this.updateOrderValues.update(val => ({
+
+        ...val,
+        details: val.details.filter((_, i) => i !== index)
+
+      }))
+
+    }
 
   }
 
@@ -171,20 +172,23 @@ export default class Orders {
 
   }
 
-  // updateOrder(form: NgForm) {
+  updateOrder(form: NgForm) {
 
-  //   this.#http.put<ResultModel<OrderModel>>("order", this.updateOrderValues(), (res) => {
+    // console.table(this.updateOrderValues())
+    // return
 
-  //     this.#toastr.showToast("Success", "Order successfully updated.", "success")
+    this.#http.put<ResultModel<OrderModel>>("order", this.updateOrderValues(), (res) => {
 
-  //     const modalInstance = bootstrap.Modal.getInstance(this.updateModalRef.nativeElement)
-  //     modalInstance?.hide()
+      this.#toastr.showToast("Success", "Order successfully updated.", "success")
 
-  //     this.orders.reload()
+      const modalInstance = bootstrap.Modal.getInstance(this.updateModalRef.nativeElement)
+      modalInstance?.hide()
 
-  //   })
+      this.orders.reload()
 
-  // }
+    })
+
+  }
 
   deleteOrder(order: OrderModel) {
 

@@ -97,11 +97,6 @@ namespace ERP.Infrastructure.Context
                     }
                 }
 
-                if (entry.State == EntityState.Deleted)
-                {
-                    throw new ArgumentException("You can not delete any record!");
-                }
-
             }
             return base.SaveChangesAsync(cancellationToken);
         }

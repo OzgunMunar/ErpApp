@@ -46,7 +46,20 @@ namespace ERP.Application.Features.Orders.GetAll
                     ord.OrderedDate,
                     ord.DeliveryDate,
                     ord.Status,
-                    ord.Details
+                    ord.Details == null
+                        ? new List<OrderDetail>()
+                        : ord.Details
+                            .Where(d => !d.IsDeleted)
+                            .Select(d => new OrderDetail
+                            {
+                                Id = d.Id,
+                                OrderId = d.OrderId,
+                                ProductId = d.ProductId,
+                                Quantity = d.Quantity,
+                                Price = d.Price,
+                                Product = d.Product
+                            })
+                            .ToList()
 
                 ))
                 .ToListAsync(cancellationToken);
