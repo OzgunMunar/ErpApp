@@ -35,6 +35,14 @@
 
                     <ng-template flexiGridColumnCommandTemplate let-item class="text-center">
 
+                        <a 
+                            href="requirements-planning/{{item.id}}"
+                            class="btn btn-sm btn-outline-dark me-1"
+                            target="_blank"
+                        >
+                            <i class="fa-solid fa-list"></i>
+                        </a>
+
                         <flexi-button 
                             btnIcon="edit" 
                             btnColor="info" 

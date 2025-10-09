@@ -43,6 +43,10 @@ export const routes: Routes = [
                 loadComponent: () => import("../app/components/orders/orders")
             }
         ]
+    },
+    {
+        path: "requirements-planning/:orderId",
+        loadComponent: () => import("../app/components/requirements-planning/requirements-planning")
     }
 
 ];

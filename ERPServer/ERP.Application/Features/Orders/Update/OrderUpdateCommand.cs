@@ -68,7 +68,6 @@ namespace ERP.Application.Features.Orders.Update
                 .Where(d => !existingProductIds.Contains(d.ProductId))
                 .Select(d => new OrderDetail
                 {
-                    Id = Guid.NewGuid(),
                     OrderId = order.Id,
                     ProductId = d.ProductId,
                     Quantity = d.Quantity,
@@ -83,6 +82,8 @@ namespace ERP.Application.Features.Orders.Update
             order.OrderedDate = request.OrderedDate;
             order.DeliveryDate = request.DeliveryDate;
             order.Status = OrderStatusEnum.FromValue(request.Status);
+
+            orderDetailRepository.AddRange(newDetails);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
 

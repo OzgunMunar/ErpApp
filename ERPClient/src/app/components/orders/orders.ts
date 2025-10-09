@@ -174,9 +174,6 @@ export default class Orders {
 
   updateOrder(form: NgForm) {
 
-    // console.table(this.updateOrderValues())
-    // return
-
     this.#http.put<ResultModel<OrderModel>>("order", this.updateOrderValues(), (res) => {
 
       this.#toastr.showToast("Success", "Order successfully updated.", "success")
