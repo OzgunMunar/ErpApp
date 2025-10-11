@@ -20,7 +20,7 @@ export const orderStatus = [
         value: 1
     },
     {
-        name: "Requirement Plan Pending",
+        name: "Requirement Plan Worked",
         value: 2
     },
     {

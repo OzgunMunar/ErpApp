@@ -46,7 +46,8 @@ export const routes: Routes = [
     },
     {
         path: "requirements-planning/:orderId",
-        loadComponent: () => import("../app/components/requirements-planning/requirements-planning")
+        loadComponent: () => import("../app/components/requirements-planning/requirements-planning"),
+        canActivate: [() => inject(Auth).isAuthenticated()]
     }
 
 ];

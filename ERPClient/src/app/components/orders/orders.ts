@@ -79,6 +79,10 @@ export default class Orders {
   readonly customerData = computed<CustomerModel[]>(() => this.customers.value()?.value ?? [])
   readonly productData = computed<ProductModel[]>(() => this.products.value()?.value ?? [])
 
+  getAll() {
+    this.orders.reload()
+  }
+
   openAddModal() {
 
     this.newOrder.set({ ...initialOrderModel })

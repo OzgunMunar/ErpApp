@@ -160,6 +160,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ERP.WebAPI.Controllers.OrderController",
+    "Method": "RequirementsPlanningByOrderId",
+    "RelativePath": "api/Order/requirements-planning",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Application.Features.Orders.RequirementsPlanningByOrderId.RequirementsPlanningByOrderIdCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ERP.WebAPI.Controllers.ProductController",
     "Method": "CreateProduct",
     "RelativePath": "api/Product",

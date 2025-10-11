@@ -1,5 +1,6 @@
 ﻿using ERP.Application.Features.Orders.Create;
 using ERP.Application.Features.Orders.Delete;
+using ERP.Application.Features.Orders.RequirementsPlanningByOrderId;
 using ERP.Application.Features.Orders.Update;
 using ERP.WebAPI.Abstractions;
 using MediatR;
@@ -29,6 +30,15 @@ namespace ERP.WebAPI.Controllers
         public async Task<IActionResult> DeleteOrder(Guid id, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new OrderDeleteCommand(id), cancellationToken);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpPost("requirements-planning")]
+        public async Task<IActionResult> RequirementsPlanningByOrderId(
+            [FromBody]RequirementsPlanningByOrderIdCommand request, 
+            CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(request, cancellationToken);
             return StatusCode(response.StatusCode, response);
         }
 

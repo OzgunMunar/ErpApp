@@ -1,6 +1,10 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { initialRequirementsPlanningModel, RequirementsPlanningModel } from '../../models/requirements-planning.model';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Http } from '../../services/http';
+import { ResultModel } from '../../models/result.model';
+import { FlexiToastService } from 'flexi-toast';
 
 @Component({
   selector: 'app-requirements-planning',
@@ -13,16 +17,39 @@ import { CommonModule } from '@angular/common';
 
 export default class RequirementsPlanning {
 
-  readonly data = signal<RequirementsPlanningModel>({ ...initialRequirementsPlanningModel })
+  constructor(
+    private activated: ActivatedRoute
+  ) {
 
-  constructor() {
+    this.activated.params.subscribe(res => {
 
-    effect(() => {
+      this.orderId.set(res["orderId"])
+      this.get()
 
-      console.log(this.data())
     })
 
   }
 
+  readonly data = signal<RequirementsPlanningModel>({ ...initialRequirementsPlanningModel })
+  readonly orderId = signal<string>("")
+
+  readonly #http = inject(Http)
+  readonly #toast = inject(FlexiToastService)
+
+  get() {
+
+    this.#http.post<RequirementsPlanningModel>("order/requirements-planning", { OrderId: this.orderId() }, 
+      (res) => {
+
+        if(res.data) {
+
+          this.data.set(res.data)
+          console.log(this.data())
+
+        }
+
+    })
+
+  }
 
 }
