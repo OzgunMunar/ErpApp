@@ -11,6 +11,8 @@ namespace ERP.Domain.Entities
         public decimal NumberOfEntry { get; set; }
         public decimal NumberOfOutputs { get; set; }
         public decimal Price { get; set; }
+        public Guid? InvoiceId { get; set; }
+        public Invoice? Invoice { get; set; }
 
     }
 

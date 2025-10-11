@@ -1,5 +1,6 @@
 ﻿using ERP.Application.Features.Customers.GetAll;
 using ERP.Application.Features.Depot.GetAll;
+using ERP.Application.Features.Invoices.GetAll;
 using ERP.Application.Features.Orders.GetAll;
 using ERP.Application.Features.Products.GetAll;
 using ERP.Application.Features.Recipies.GetAll;
@@ -38,7 +39,7 @@ namespace ERP.WebAPI.Controllers
             builder.EntitySet<ProductGetAllQueryResponse>("products");
             builder.EntitySet<Recipe>("recipies");
             builder.EntitySet<OrdersGetAllQueryResponse>("orders");
-            //builder.EntitySet<OrderDetail>("orderdetails");
+            builder.EntitySet<InvoiceGetAllQueryResponse>("invoices");
 
             builder.ComplexType<OrderDetail>();
             builder.ComplexType<Product>();
@@ -81,6 +82,16 @@ namespace ERP.WebAPI.Controllers
             var response = await _mediator.Send(new OrdersGetAllQuery(), cancellationToken);
             return response;
         }
-        
+
+        [HttpGet("invoices/{invoiceType:int}")]
+        public async Task<IQueryable<InvoiceGetAllQueryResponse>> GetAllInvoices(
+            [FromBody] int invoiceType, CancellationToken cancellationToken)
+        {
+
+            var response = await _mediator.Send(new InvoiceGetAllQuery(invoiceType), cancellationToken);
+            return response;
+
+        }
+
     }
 }

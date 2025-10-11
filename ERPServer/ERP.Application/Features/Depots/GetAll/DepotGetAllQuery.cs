@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Application.Features.Depot.GetAll
 {
-    public sealed record DepotGetAllQuery(): IRequest<IQueryable<DepotGetAllQueryResponse>>;
+    public sealed record DepotGetAllQuery(): 
+        IRequest<IQueryable<DepotGetAllQueryResponse>>;
 
     public sealed record DepotGetAllQueryResponse(
 
