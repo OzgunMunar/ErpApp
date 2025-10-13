@@ -41,6 +41,10 @@ export const routes: Routes = [
             {
                 path: "orders",
                 loadComponent: () => import("../app/components/orders/orders")
+            },
+            {
+                path: "invoice",
+                loadComponent: () => import("../app/components/invoice/invoice")
             }
         ]
     },
